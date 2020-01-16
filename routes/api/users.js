@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator/check');
 
+//user model
+const User = require('../../models/User');
+
 //@ route   POST api/users
 //@ desc   Test route
 //access   Public
@@ -24,6 +27,15 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
+
+    const { name, email, password } = req.body;
+
+    //see if the users exist , if there is ,will send back error
+
+    //get users gravatar
+    //encrypt password
+    //return jsonwebtoken -- in order to log in right away, need token to login
+
     res.send('User Route');
   }
 );
