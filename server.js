@@ -1,8 +1,13 @@
 const express = require('express');
+const connectDB = require('./config/db');
 
 const app = express();
 
-app.get('/', (res, req) => res.send('Api Running'));
+//Connect Database
+
+connectDB();
+
+app.get('/', (req, res) => res.send('Api Running'));
 
 const PORT = process.env.PORT || 8000;
 
