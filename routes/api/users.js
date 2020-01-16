@@ -22,7 +22,7 @@ router.post(
       min: 6
     })
   ],
-  (req, res) => {
+  async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -30,13 +30,21 @@ router.post(
 
     const { name, email, password } = req.body;
 
-    //see if the users exist , if there is ,will send back error
+    try {
+      let user = await User.findOne({ email });
 
-    //get users gravatar
-    //encrypt password
-    //return jsonwebtoken -- in order to log in right away, need token to login
-
-    res.send('User Route');
+      if (user) {
+        res.status(400).json({ errors: [{ msg: 'User already exists' }] });
+      }
+      //see if the users exist , if there is ,will send back error
+      //get users gravatar
+      //encrypt password
+      //return jsonwebtoken -- in order to log in right away, need token to login
+      res.send('User Route');
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server error');
+    }
   }
 );
 

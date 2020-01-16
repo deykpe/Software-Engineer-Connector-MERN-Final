@@ -16,10 +16,10 @@ const UserSchema = new mongoose.Schema({
   },
   avatar: {
     type: String
-  }
+  },
   date: {
-      type: Date,
-      default: Date.now
+    type: Date,
+    default: Date.now
   }
 });
 
