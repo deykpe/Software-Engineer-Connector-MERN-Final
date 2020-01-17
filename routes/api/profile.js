@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
-const Profille = require('../../models/Profile');
+const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 
 //@ route   GET api/profile/me
@@ -81,8 +81,20 @@ router.post(
     if (linkedin) profileFields.social.linkedin = linkedin;
     if (instagram) profileFields.social.instagram = instagram;
 
-    console.log(profileFields.social.twitter);
-    res.send('Hello');
+    try {
+      let profile = await Profile.findOne({ user: req.user.id });
+      if (profile) {
+        profile = await Profile.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: profileFields },
+          { new: true }
+        );
+        return res.json(Profile);
+      }
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
   }
 );
 module.exports = router;
