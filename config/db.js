@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const config = require('config');
+//to get files from json in config folder
 const db = config.get('mongoURI');
 
+//instead of .then , i will use async
 const connectDB = async () => {
   try {
     await mongoose.connect(db, {
