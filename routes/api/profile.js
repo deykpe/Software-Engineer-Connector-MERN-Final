@@ -266,19 +266,19 @@ router.put(
     }
 
     const {
-      title,
-      company,
-      location,
+      school,
+      degree,
+      fieldofstudy,
       from,
       to,
       current,
       description
     } = req.body;
 
-    const newExp = {
-      title,
-      company,
-      location,
+    const newEdu = {
+      school,
+      degree,
+      fieldofstudy,
       from,
       to,
       current,
@@ -288,7 +288,7 @@ router.put(
     try {
       const profile = await Profile.findOne({ user: req.user.id });
 
-      profile.experience.unshift(newExp);
+      profile.education.unshift(newEdu);
 
       //using this for front end
       await profile.save();
