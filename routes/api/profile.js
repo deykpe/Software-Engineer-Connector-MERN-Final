@@ -145,8 +145,10 @@ router.delete('/', auth, async (req, res) => {
     // remove users post
     //remove profile
     await Profile.findOneAndRemove({ user: req.user.id });
+    //remove user
+    await User.findOneAndRemove({ _id: req.user.id });
 
-    res.json(profile);
+    res.json({ msg: 'User removed / deleted / erased' });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
