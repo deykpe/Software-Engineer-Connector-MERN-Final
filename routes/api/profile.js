@@ -241,7 +241,7 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
 //@ desc   add profile education
 //access   Private
 router.put(
-  '/experience',
+  '/education',
   [
     auth,
     [
