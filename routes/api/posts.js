@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
+
+const Post = require('../../models/Post');
+const Profile = require('../../models/Profile');
+const User = require('../../models/User');
+
 //@ route   POST api/posts
 //@ desc   Create a post
 //access   Private
@@ -15,7 +20,14 @@ router.post(
         .isEmpty()
     ]
   ],
-  async (req, res) => {}
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const user = await User;
+  }
 );
 
 module.exports = router;
