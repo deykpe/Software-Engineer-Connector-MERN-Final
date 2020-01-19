@@ -288,6 +288,10 @@ router.put(
     try {
       const profile = await Profile.findOne({ user: req.user.id });
 
+      profile.education.unshift(newEdu);
+
+      await profile.save();
+
       res.json(profile);
     } catch (err) {
       console.error(err.message);
