@@ -26,3 +26,18 @@ ul {
 img {
   width: 100%;
 }
+
+//Navar
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 2rem; //rem is multiplier of whatever the HTML font size is (16 default)
+  //2 rem is 32 pixels
+  position: fixed; // always top
+  z-index: 1; //always on top of the rest of the content
+  width: 100%;
+  top: 0;
+  border-bottom: solid 1px $primary-color;
+  opacity: 0.9;
+}
